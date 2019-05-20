@@ -47,6 +47,7 @@ public class AMLSim extends ParameterizedPaySim {
 	public AMLSim(long seed) {
 		super(seed);
 		super.setTagName("1");
+
 	}
 
 	public void setCurrentLoop(int currentLoop){
@@ -188,6 +189,7 @@ public class AMLSim extends ParameterizedPaySim {
 		}
 		return columnIndex;
 	}
+//	ACCOUNT_ID,CUSTOMER_ID,INIT_BALANCE,START_DATE,END_DATE,COUNTRY,ACCOUNT_TYPE,IS_SUSPICIOUS,IS_FRAUD,TX_BEHAVIOR_ID
 
 	private final Set<String> baseColumns = new HashSet<>(Arrays.asList("ACCOUNT_ID", "IS_FRAUD", "TX_BEHAVIOR_ID", "INIT_BALANCE", "START_DATE", "END_DATE"));
 
@@ -252,6 +254,7 @@ public class AMLSim extends ParameterizedPaySim {
 		}
 		reader.close();
 	}
+//	alertID,reason,clientID,isSubject,modelID,minAmount,maxAmount,startStep,endStep,scheduleID
 
 
 	protected void loadAlertFile(String alertFile) throws IOException{
