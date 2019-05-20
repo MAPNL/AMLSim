@@ -69,9 +69,10 @@ def kronecker_generator_general(N, M):
 
 def powerlaw_cluster_generator(N, edgefactor):
   edges = nx.barabasi_albert_graph(N, edgefactor, seed=0).edges()  # Undirected edges
-
   # Swap the direction of half edges to diffuse degree
-  di_edges = [(edges[i][0], edges[i][1]) if i % 2==0 else (edges[i][1], edges[i][0]) for i in range(len(edges))]
+  #di_edges = [(edges[i][0], edges[i][1]) if i % 2==0 else (edges[i][1], edges[i][0]) for i in range(len(edges))]
+  edges = nx.barabasi_albert_graph(N, edgefactor, seed=0).edges()  # Undirected edges
+  di_edges = [(u,v) if i%2==0 else (v,u) for i,(u,v) in enumerate(edges)]
   g = nx.DiGraph()
   g.add_edges_from(di_edges)  # Create a directed graph
   return g
@@ -91,14 +92,14 @@ if __name__ == "__main__":
   print("Number of vertices: %d" % g.number_of_nodes())  # Number of vertices (accounts)
   print("Number of edges: %d" % g.number_of_edges())  # Number of edges (transactions)
 
-  in_deg = Counter(g.in_degree().values())
-  out_deg = Counter(g.out_degree().values())
+  in_deg = Counter([v for k,v in g.in_degree()])
+  out_deg = Counter([v for k,v in g.out_degree()])
 
-  keys = set(sorted(in_deg.keys() + out_deg.keys()))
+  counts = sorted(set(in_deg.keys()).union(set(out_deg.keys())))
 
   with open(argv[3], "w") as wf:
     writer = csv.writer(wf)
     writer.writerow(["Count","In-degree","Out-degree"])
-    for k in keys:
+    for k in counts:
       writer.writerow([k, in_deg[k], out_deg[k]])
 
