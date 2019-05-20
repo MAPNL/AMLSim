@@ -38,3 +38,7 @@ outputs/*/
 outputs/*.txt
 outputs/*.png
 outputs/*.gif
+
+
+target/
+amlsim/target/
