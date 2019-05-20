@@ -92,8 +92,8 @@ if __name__ == "__main__":
   print("Number of vertices: %d" % g.number_of_nodes())  # Number of vertices (accounts)
   print("Number of edges: %d" % g.number_of_edges())  # Number of edges (transactions)
 
-  in_deg = Counter([v for k,v in g.in_degree()])
-  out_deg = Counter([v for k,v in g.out_degree()])
+  in_deg = Counter([v for v in g.in_degree().values()])
+  out_deg = Counter([v for v in g.out_degree().values()])
 
   counts = sorted(set(in_deg.keys()).union(set(out_deg.keys())))
 
